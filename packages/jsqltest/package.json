@@ -1,6 +1,6 @@
 {
   "name": "jsqltest",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Postgres testing with rollbacks",
   "author": "Dan Lynch <pyramation@gmail.com>",
   "homepage": "https://github.com/pyramation/jsqltest/tree/master/packages/jsqltest#readme",
