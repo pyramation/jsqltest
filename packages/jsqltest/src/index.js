@@ -3,7 +3,7 @@ import { parse } from 'pg-connection-string';
 import env from './env';
 import { PgpWrapper, wrapConn } from './stmts';
 import { streamSql } from './utils';
-import { createdb, dropdb } from './utils/db';
+import { createdb, dropdb, installExt } from './utils/db';
 
 const pgp = pgPromise({
   noWarnings: true
@@ -65,12 +65,7 @@ export class TestConnection {
 }
 
 function getDatabaseName(dbname) {
-  return (
-    dbname +
-    '-' +
-    Math.random().toString(36).substring(2, 15) +
-    Math.random().toString(36).substring(2, 15)
-  );
+  return dbname + '-' + Date.now();
 }
 
 // this creates a db, and then enables just does a basic rollbacks
@@ -86,6 +81,9 @@ export class TestDatabase {
   }
   async createdb() {
     await createdb(this.config);
+  }
+  async installExt(extensions) {
+    await installExt(this.config, extensions);
   }
   async connect() {
     this.db = await connect(this.config);
